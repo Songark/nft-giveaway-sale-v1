@@ -1,0 +1,116 @@
+{
+  "MembershipNFT": {
+    "hardhat": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0xb205fD858BB3242D095FDEE58e20618F19b807EB",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    },
+    "ethmainnet": {
+      "address": "0x0372736990102B357Fd55E47463DDfAF204C9bDC",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    }
+  },
+  "SaleContract": {
+    "hardhat": {
+      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0x3FD0C88FbeAeFBad1c95253faA8105F8E081F012",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    }
+  },
+  "OwndContract": {
+    "rinkeby": {
+      "address": "0xD880a441519203095149B7a204464a94151B5531",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    }
+  },
+  "GiftContract": {
+    "hardhat": {
+      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0x62ca8e56dC65Eb499DB0915F2F623B934945fB5a",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    }
+  },
+  "GiftContractV2": {
+    "hardhat": {
+      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0xa19e782432417e22d5fd28B6437abc8903d5Ef93",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    },
+    "ethmainnet": {
+      "address": "0x9e6c8B2BA36C6D3bC6a7A053d6137Cf6dF9D6A4C",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    },
+    "mumbai": {
+      "address": "0xa64b85F52be9A78C04611B0E363DB53C1C9e030C",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    }
+  },
+  "GenesisOwnerKey_Mogul": {
+    "hardhat": {
+      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0x8BE30C38839EeC0986Edb3D9914c3E6a247472d7",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    },
+    "ethmainnet": {
+      "address": "0x5E972096a48C73bAb6b56DA3eb2D60cEDF48e21c",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    }
+  },
+  "GenesisOwnerKey_Investor": {
+    "hardhat": {
+      "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0x386B0717d948f349BDce22e243e5D1cfdC9A540D",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    },
+    "ethmainnet": {
+      "address": "0xE7921C451C36b491Df65748b46013d58935b3B5c",
+      "deployer": "0xd5439F21fd46f2eA74563443626f0246E268983f"
+    }
+  },
+  "MinionverseNFT": {
+    "hardhat": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0x976806B2a61ce2C243cA12c5127A53d5f385d554",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    },
+    "mumbai": {
+      "address": "0xbB70C9d0c25EdFAf6Bf03B738756140771d4096E",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    }
+  },
+  "RoosterwarsNFT": {
+    "hardhat": {
+      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "rinkeby": {
+      "address": "0x96D969955bBa8c166b61AF54e8Fb460B50C94018",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    },
+    "mumbai": {
+      "address": "0xE55A593606C3c0b17bfC255D273dfAF3900F01b7",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    }
+  }
+}
