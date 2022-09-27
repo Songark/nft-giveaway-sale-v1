@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const init = async () => {
-      setCollection(0);
+      setCollection(1);
       setTokenId("");
       setAddress("");
     };
@@ -261,8 +261,7 @@ const Dashboard = () => {
                   value={tier}
                   label="Select Type"
                   onChange={handleChange}
-                >
-                  <MenuItem key={0} value={0}>{collectionNames[0]}</MenuItem>
+                >                  
                   <MenuItem key={1} value={1}>{collectionNames[1]}</MenuItem>
                 </Select>
               </FormControl>

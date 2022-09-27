@@ -17,39 +17,39 @@ async function main() {
 
   const addresses = initAddresses(currentNetwork, deployerAddress);
   console.log("Deploying contracts with the account: ", deployerAddress);
-  const minionverseContract = await getMinionverseNFT();
+  // const minionverseContract = await getMinionverseNFT();
   const roosterwarsContract = await getRoosterwarsNFT();
 
   if (currentNetwork == "rinkeby") {
-    console.log("MOT addresss: ", minionverseContract.address);
+    // console.log("MOT addresss: ", minionverseContract.address);
     console.log("RWT addresss: ", roosterwarsContract.address);
     console.log("God's address: ", addresses.treasury);
     console.log("My account2 address: ", addresses.signerAddress);
-  } else if (currentNetwork == "maticmum") {
-    console.log("MOT addresss: ", minionverseContract.address);
+  } else if (currentNetwork == "mumbai") {
+    // console.log("MOT addresss: ", minionverseContract.address);
     console.log("RWT addresss: ", roosterwarsContract.address);
     console.log("God's address: ", addresses.treasury);
     console.log("My account2 address: ", addresses.signerAddress);
   } else if (currentNetwork == "ethmainnet") {
-    console.log("MOT addresss: ", minionverseContract.address);
+    // console.log("MOT addresss: ", minionverseContract.address);
     console.log("RWT addresss: ", roosterwarsContract.address);
     console.log("William's address: ", addresses.treasury);
     console.log("Kelvin's address: ", addresses.signerAddress);
   } else {
-    console.log("MOT addresss: ", minionverseContract.address);
+    // console.log("MOT addresss: ", minionverseContract.address);
     console.log("RWT addresss: ", roosterwarsContract.address);
-    console.log("MOT Treasury address: ", addresses.treasury);
-    console.log("MOT signer address: ", addresses.signerAddress);
+    console.log("William's address: ", addresses.treasury);
+    console.log("Kelvin's address: ", addresses.signerAddress);
   }
 
-  if ( !minionverseContract || !roosterwarsContract || addresses.treasury == "" ) {
+  if ( /*!minionverseContract ||*/ !roosterwarsContract || addresses.treasury == "" ) {
     console.log("Not initialized");
     return
   }
   const contract = await deployGiftContractV2(true, 5);
   await (
     await contract.initialize(
-    minionverseContract.address, 
+    roosterwarsContract.address, 
     roosterwarsContract.address, 
     addresses.treasury,
     addresses.treasury
@@ -62,7 +62,6 @@ async function main() {
   await (await contract.grantRole(await contract.MINTER_ROLE(), addresses.signerAddress)).wait(1);
   console.log("Granted GiftContractV2 a Minter role to: ", addresses.signerAddress);
   console.log("Granted GiftContractV2 a Minter role to: ", addresses.treasury);
-
 
   //await nftInstance.setApprovalForAll(contract.address, true, { from: addresses.treasury });
 }

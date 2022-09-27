@@ -29,13 +29,24 @@ const networks = {
 
   '80001': {
     "name": "Polygon Testnet",
-    "giftdrop": "0xa64b85F52be9A78C04611B0E363DB53C1C9e030C",
+    "giftdrop": "0x2e3d3a52d4bB7af769cCf37304C4c850a5614Aff",
     "mot": "0xbB70C9d0c25EdFAf6Bf03B738756140771d4096E",
-    "rwt": "0xE55A593606C3c0b17bfC255D273dfAF3900F01b7",
+    "rwt": "0xd2285342D9b40f79cEED20228c5470cd91770D69",
 
-    "treasury" :  "0xF0d096D33559cDc5f527435b82073c108D6c3107",
+    "treasury" :  "0x21796bA19B1579F51d5177f56C656e8a2476E037",
     "admin" :  "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234",
-    "signer" :  "0x05Be88DD6e26162184D897557a6e6d9652Efced4",
+    "signer" :  "0x3aC0e043AD218a854D7Fda76CEC09Cf932da56Ec",
+  },
+
+  '137': {
+    "name": "Polygon Mainnet",
+    "giftdrop": "0x0a3159eC4A5a15690fE6A00551bb6f5dB07c3968",
+    "mot": "0xbB70C9d0c25EdFAf6Bf03B738756140771d4096E",
+    "rwt": "0xbB70C9d0c25EdFAf6Bf03B738756140771d4096E",
+
+    "treasury" :  "0x21796bA19B1579F51d5177f56C656e8a2476E037",
+    "admin" :  "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234",
+    "signer" :  "0x3aC0e043AD218a854D7Fda76CEC09Cf932da56Ec",
   }
 }
 
@@ -69,14 +80,14 @@ const getBlockchain = async () => {
 
     if(account.toLowerCase() == networks[networkId].treasury.toLowerCase()) { // treasure
       
-      const isApprovedForAll1 = await minionverseContract.methods.isApprovedForAll(
-        account, networks[networkId].giftdrop)
-        .call();
-      if(!isApprovedForAll1) {
-        await minionverseContract.methods.setApprovalForAll(
-          networks[networkId].giftdrop, true)
-          .send({ from: account, gas: 400000 });
-      }
+      // const isApprovedForAll1 = await minionverseContract.methods.isApprovedForAll(
+      //   account, networks[networkId].giftdrop)
+      //   .call();
+      // if(!isApprovedForAll1) {
+      //   await minionverseContract.methods.setApprovalForAll(
+      //     networks[networkId].giftdrop, true)
+      //     .send({ from: account, gas: 400000 });
+      // }
 
       const isApprovedForAll2 = await roosterwarsContract.methods.isApprovedForAll(
         account, networks[networkId].giftdrop)

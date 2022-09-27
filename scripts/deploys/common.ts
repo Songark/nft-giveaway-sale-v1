@@ -36,7 +36,8 @@ const test_addresses: Addresses = {
 
 export const initAddresses = (network: string, defaultAddress: tEthereumAddress) : Addresses => {
 
-  let addresses : Addresses = network.includes("main") ? main_addresses : test_addresses;
+  // let addresses : Addresses = network.includes("main") ? main_addresses : test_addresses;
+  let addresses : Addresses = main_addresses;
 
   if(!hasValues(addresses.deployerAddress))
     addresses.deployerAddress = defaultAddress;

@@ -5,5 +5,5 @@ export const WAD = Math.pow(10, 18).toString();
 
 export const names: string[] = ["Minionverse", "Rooster Wars"];
 export const symbols: string[] = ["MOT", "RFT"];
-export const treasury: string = "0xF0d096D33559cDc5f527435b82073c108D6c3107";
+export const treasury: string = "0x21796bA19B1579F51d5177f56C656e8a2476E037";
 export const totalsupply: number = 50;

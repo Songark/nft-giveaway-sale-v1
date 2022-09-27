@@ -49,7 +49,7 @@ contract RoosterwarsNFT is ERC721Psi, IRoosterwarsNFT, Ownable {
         ERC721Psi(name_, symbol_) {
         
         _locked = true;
-        baseURI = "https://gateway.pinata.cloud/ipfs/QmcRENdV5aFjmmUhLQkZ4Qmo8u9rMfWD8exy8uaF2rn51w/";
+        baseURI = "https://playestates.mypinata.cloud/ipfs/Qmc1jByqMPu1Y1W2HwY9XumE2pbj3nS9jVEtLW26Q544fR/";
 
         // https://docs.chain.link/docs/ethereum-addresses/, ETH/USD on Rinkeby
         priceFeedUsd = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);

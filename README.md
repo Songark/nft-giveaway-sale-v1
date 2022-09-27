@@ -2,7 +2,7 @@
 
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
 
-Currently it purposes issuing ERC-721Psi based NFT bulk minting and Give-away contract based Multisig over the ethereum network for further benefits on PlayEstate Minionverse and Rooster Wars NFT ecosystem.
+Currently it purposes issuing ERC-721Psi based NFT bulk minting and Give-away contract based Multisig over the ethereum network for further benefits on PlayEstate Rooster Wars NFT ecosystem.
 
 The project comes with sample contracts, a few tests for that contract, some deploy scripts that deploys all contracts, and a frontend admin panel for nft give away. It also comes with a variety of other tools, preconfigured to work with the project code.
 

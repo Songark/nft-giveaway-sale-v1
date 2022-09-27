@@ -21,7 +21,7 @@ import { InjectedConnector } from '@web3-react/injected-connector'
 import { getBlockchain } from '../../../../lib/ethereum'
 
 const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 80001],
+  supportedChainIds: [1, 3, 4, 5, 42, 80001, 137],
   })
 const ETH_NET = "0x01";
 
