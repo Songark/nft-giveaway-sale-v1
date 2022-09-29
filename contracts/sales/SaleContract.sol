@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "erc721a/contracts/IERC721A.sol";
-import "../interfaces/IMinionverseNFT.sol";
+import "../interfaces/ILootlotNFT.sol";
 import "../interfaces/ISaleContract.sol";
 
 contract SaleContract is ISaleContract, AccessControl, ReentrancyGuard {

@@ -19,10 +19,12 @@ import ModeToggler from 'src/@core/layouts/components/shared-components/ModeTogg
 import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { getBlockchain } from '../../../../lib/ethereum'
+import detectEthereumProvider from '@metamask/detect-provider';
 
 const injected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42, 80001, 137],
-  })
+})
+
 const ETH_NET = "0x01";
 
 function TransitionLeft(props) {
@@ -39,19 +41,15 @@ const AppBarContent = props => {
   const [connectState, setConnectState] = useState(false);
   const [loginState, setLoginState] = useState();
   const {active, account, library, connector, chainId, activate, deactivate } = useWeb3React();
-
-  useEffect(() => {
-    injected.isAuthorized()
-    .then((isAuthorized) => {
-      if (isAuthorized && !active) {
-        connectToWallet();
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-
+  
+  useEffect(() => {    
     const initCall = async () => {
+      const provider = await detectEthereumProvider();
+      if (provider == undefined || !provider.isMetaMask) {
+        setLoginState("No MetaMask wallet.... Please install it.");
+        return;
+      }
+
       if (!active)
         await onConnectWallet();
     }
@@ -59,14 +57,22 @@ const AppBarContent = props => {
     initCall();
   }, []);
 
-  async function connectToWallet() {
+  async function connect() {
     try {
       await activate(injected);
     } catch (ex) {
       console.log(ex)
     }
   }
-    
+   
+  async function disconnect() {
+    try {
+      await deactivate();
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
   const handleClose = () => {
     setLoginState("");
   };
@@ -76,9 +82,14 @@ const AppBarContent = props => {
   }
 
   const onConnectWallet = async () => {
-    if(!connectState) {
+    if (!connectState) {
       try {
-        const { giftdrop, minionverseContract, roosterwarsContract, accounts } = await getBlockchain();
+        const { networkId, giftdrop, minionverseContract, roosterwarsContract, accounts } = await getBlockchain();        
+        if (networkId !== process.env.NEXT_PUBLIC_NETWORK_ID) {      
+          setLoginState("Please switch to Polygon Mainnet in Metamask");
+          return;
+        }
+
         settings.giftdrop = giftdrop;
         settings.MinionverseContract = minionverseContract;
         settings.RoosterwarsContract = roosterwarsContract;
@@ -100,7 +111,12 @@ const AppBarContent = props => {
         }
       } catch(e) {
         console.log(e.message);
-        setLoginState("No MetaMask wallet.... Please install it.");
+        if (e.code == 4001) {
+          setLoginState(e.message);
+        }
+        else {
+          setLoginState("No MetaMask wallet.... Please install it.");
+        }
       }
   
     } else {
@@ -116,6 +132,7 @@ const AppBarContent = props => {
       setConnectBtnName("Connect Wallet");
       setConnectState(false);
       setLoginState("Disconnected from your wallet!");
+      await disconnect();
     }
     saveSettings(settings);
   }

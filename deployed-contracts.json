@@ -57,7 +57,7 @@
       "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     },
     "polygonmain": {
-      "address": "0x0a3159eC4A5a15690fE6A00551bb6f5dB07c3968",
+      "address": "0x55f5Dac0A502A50d73B2610fd14A4e99B38A0626",
       "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     }
   },
@@ -113,11 +113,21 @@
       "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     },
     "mumbai": {
-      "address": "0xd2285342D9b40f79cEED20228c5470cd91770D69",
+      "address": "0x2f433D7C8e237CeaB6327F9dB6060E4ACb7Aafc7",
       "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     },
     "polygonmain": {
       "address": "0xbB70C9d0c25EdFAf6Bf03B738756140771d4096E",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    }
+  },
+  "LootlotNFT": {
+    "polygonmain": {
+      "address": "0x86e1B6aB7752Ac84DF42CdaA0962f775800d1c4E",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    },
+    "mumbai": {
+      "address": "0x86e1B6aB7752Ac84DF42CdaA0962f775800d1c4E",
       "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     }
   }

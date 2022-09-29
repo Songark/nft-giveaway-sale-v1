@@ -1,7 +1,7 @@
 import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 import Giftdrop from './abis/contracts/drops/GiftContractV2.sol/GiftContractV2.json';
-import MinionverseNFT from './abis/contracts/tokens/MinionverseNFT.sol/MinionverseNFT.json';
+import LootlotNFT from './abis/contracts/tokens/LootlotNFT.sol/LootlotNFT.json';
 import RoosterwarsNFT from './abis/contracts/tokens/RoosterwarsNFT.sol/RoosterwarsNFT.json';
 
 const networks = {
@@ -40,9 +40,9 @@ const networks = {
 
   '137': {
     "name": "Polygon Mainnet",
-    "giftdrop": "0x0a3159eC4A5a15690fE6A00551bb6f5dB07c3968",
-    "mot": "0xbB70C9d0c25EdFAf6Bf03B738756140771d4096E",
-    "rwt": "0xbB70C9d0c25EdFAf6Bf03B738756140771d4096E",
+    "giftdrop": "0x55f5Dac0A502A50d73B2610fd14A4e99B38A0626",
+    "mot": "0x86e1b6ab7752ac84df42cdaa0962f775800d1c4e",
+    "rwt": "0x86e1b6ab7752ac84df42cdaa0962f775800d1c4e",
 
     "treasury" :  "0x21796bA19B1579F51d5177f56C656e8a2476E037",
     "admin" :  "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234",
@@ -55,52 +55,53 @@ const getBlockchain = async () => {
   if (provider) {
     const accounts = await provider.request({ method: 'eth_requestAccounts' });
     const networkId = await provider.request({ method: 'net_version' });
-
-    if(networkId !== process.env.NEXT_PUBLIC_NETWORK_ID) {
-      return (null, null, null, null);
+    
+    if(networkId !== process.env.NEXT_PUBLIC_NETWORK_ID) {      
+      return ({networkId, undefined, undefined, undefined, undefined});
     }
-    const web3 = new Web3(provider);
-    
-    const giftdrop = new web3.eth.Contract(
-      Giftdrop.abi,
-      networks[networkId].giftdrop,
-    );
-    
-    const minionverseContract = new web3.eth.Contract(
-      MinionverseNFT.abi,
-      networks[networkId].mot,
-    );
-
-    const roosterwarsContract = new web3.eth.Contract(
-      RoosterwarsNFT.abi,
-      networks[networkId].rwt,
-    );
-
-    const account = accounts[0];
-
-    if(account.toLowerCase() == networks[networkId].treasury.toLowerCase()) { // treasure
+    else {
+      const web3 = new Web3(provider);
+      const giftdrop = new web3.eth.Contract(
+        Giftdrop.abi,
+        networks[networkId].giftdrop,
+      );
       
-      // const isApprovedForAll1 = await minionverseContract.methods.isApprovedForAll(
-      //   account, networks[networkId].giftdrop)
-      //   .call();
-      // if(!isApprovedForAll1) {
-      //   await minionverseContract.methods.setApprovalForAll(
-      //     networks[networkId].giftdrop, true)
-      //     .send({ from: account, gas: 400000 });
-      // }
-
-      const isApprovedForAll2 = await roosterwarsContract.methods.isApprovedForAll(
-        account, networks[networkId].giftdrop)
-        .call();
-      if(!isApprovedForAll2) {
-        await roosterwarsContract.methods.setApprovalForAll(
-          networks[networkId].giftdrop, true)
-          .send({ from: account, gas: 400000 });
-      } 
-    } else { // admin or signer
-
-    }
-    return ({giftdrop, minionverseContract, roosterwarsContract, accounts});
+      const minionverseContract = new web3.eth.Contract(
+        LootlotNFT.abi,
+        networks[networkId].mot,
+      );
+  
+      const roosterwarsContract = new web3.eth.Contract(
+        RoosterwarsNFT.abi,
+        networks[networkId].rwt,
+      );
+  
+      const account = accounts[0];
+  
+      if(account.toLowerCase() == networks[networkId].treasury.toLowerCase()) { // treasure
+        
+        const isApprovedForAll1 = await minionverseContract.methods.isApprovedForAll(
+          account, networks[networkId].giftdrop)
+          .call();
+        if(!isApprovedForAll1) {
+          await minionverseContract.methods.setApprovalForAll(
+            networks[networkId].giftdrop, true)
+            .send({ from: account, gas: 5000000 });
+        }
+  
+        // const isApprovedForAll2 = await roosterwarsContract.methods.isApprovedForAll(
+        //   account, networks[networkId].giftdrop)
+        //   .call();
+        // if(!isApprovedForAll2) {
+        //   await roosterwarsContract.methods.setApprovalForAll(
+        //     networks[networkId].giftdrop, true)
+        //     .send({ from: account, gas: 5000000 });
+        // } 
+      } else { // admin or signer
+  
+      }
+      return ({networkId, giftdrop, minionverseContract, roosterwarsContract, accounts});
+    }    
   }
 }
     

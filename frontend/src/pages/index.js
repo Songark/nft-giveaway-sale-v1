@@ -11,7 +11,7 @@ import { getBlockchain, getTreasury } from '../../lib/ethereum.js'
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
 
-const collectionNames = ["Minionverse", "Roosterwars"];
+const collectionNames = ["PlayEstate Mystery Chest"/*, "Roosterwars"*/];
 const typeNames_M = ["Flower", "Gargul", "Shaman", "Spider"];
 const typeNames_R = ["PlayRoosters1", "PlayRoosters2", "PlayRoosters3", "PlayRoosters4"];
 
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const init = async () => {
-      setCollection(1);
+      setCollection(0);
       setTokenId("");
       setAddress("");
     };
@@ -116,7 +116,8 @@ const Dashboard = () => {
       const start_Id = tier == 0 ? settings.minionverse.startId : settings.roosterwars.startId;
       const end_Id = tier == 0 ? settings.minionverse.endId : settings.roosterwars.endId;
       const tName = collectionName(tier);
-      const realTokenId = Number(nfttype) * 50 + Number(tokenId);
+      // const realTokenId = Number(nfttype) * 50 + Number(tokenId);
+      const realTokenId = Number(tokenId);
 
       if (Number(realTokenId) < Number(start_Id) || Number(realTokenId) > Number(end_Id)) {
         showAlert('error', `${tName}: Token Id ${realTokenId} is out of range [${start_Id}, ${end_Id}]`);
@@ -132,7 +133,7 @@ const Dashboard = () => {
         return;
       }
 
-      const gasFee = 400000;
+      const gasFee = 10000000;
       const receipt = await giftdrop
         .methods
         .submitAndConfirm(
@@ -162,7 +163,7 @@ const Dashboard = () => {
     const accounts = settings.accounts;
     const txnIndex = tIndex;
     try {
-      const gasFee = 400000;
+      const gasFee = 10000000;
       const receipt = await giftdrop
         .methods
         .confirmAndExecute(
@@ -190,7 +191,7 @@ const Dashboard = () => {
 
     const txnIndex = tIndex;
     try {
-      const gasFee = 100000;
+      const gasFee = 10000000;
       
       const receipt = await giftdrop
         .methods
@@ -244,15 +245,14 @@ const Dashboard = () => {
         settings.minionverse != null &&
         <Alert severity={`success`}>
           {
-            `Minionverses From #${settings.minionverse.startId} To #${settings.minionverse.endId},   
-            Rooster Wars From #${settings.roosterwars.startId} To #${settings.roosterwars.endId}`
+            `PlayEstate Mystery Chest From #${settings.minionverse.startId} To #${settings.minionverse.endId}`
           }
         </Alert>
       }
       <Card sx={{ position: 'relative' }}>
         <CardContent>
           <Grid container spacing={6}>
-            <Grid item sm={12} md={2} alignItems="center" justifyContent="center">
+            <Grid item sm={12} md={3} alignItems="center" justifyContent="center">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Select NFTs</InputLabel>
                 <Select name="tier"
@@ -262,11 +262,11 @@ const Dashboard = () => {
                   label="Select Type"
                   onChange={handleChange}
                 >                  
-                  <MenuItem key={1} value={1}>{collectionNames[1]}</MenuItem>
+                  <MenuItem key={0} value={0}>{collectionNames[0]}</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item sm={12} md={2} alignItems="center" justifyContent="center">
+            {/* <Grid item sm={12} md={2} alignItems="center" justifyContent="center">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Select Types</InputLabel>
                 <Select name="nfttype"
@@ -281,16 +281,16 @@ const Dashboard = () => {
                   ))}
                 </Select>
               </FormControl>
-            </Grid>
+            </Grid> */}
             <Grid item sm={12} md={2} alignItems="center" justifyContent="center">
               <TextField 
                 name="tokenId" 
-                fullWidth label='Token Index (1~50)' 
+                fullWidth label='Token Index (1~200)' 
                 placeholder='Token Index' 
                 value={tokenId}                 
                 onChange={handleChange} />
             </Grid>
-            <Grid item sm={12} md={4} alignItems="center" justifyContent="center">
+            <Grid item sm={12} md={5} alignItems="center" justifyContent="center">
               <TextField name="address" fullWidth label='Address To' placeholder='Address' value={address} onChange={handleChange} />
             </Grid>
             <Grid item sm={12} md={2} sx={{ display: 'flex' }} alignItems="center" justifyContent="center">

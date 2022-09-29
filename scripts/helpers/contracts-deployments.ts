@@ -1,6 +1,6 @@
 
 import { 
-  MinionverseNFT__factory, 
+  LootlotNFT__factory, 
   RoosterwarsNFT__factory, 
   SaleContract__factory, 
   GiftContractV2__factory } from "../../typechain-types";
@@ -9,7 +9,7 @@ import { withSaveAndVerify } from "./contracts-helpers";
 import { eContractid, tEthereumAddress } from "./types";
 import { Signer } from 'ethers';
 
-export const deployMinionverseNFT = async (
+export const deployLootlotNFT = async (
   deployer: Signer,
   name: string,
   symbol: string,
@@ -17,8 +17,8 @@ export const deployMinionverseNFT = async (
   confirms: number = 1
 ) => {
   const instance = await withSaveAndVerify(
-    await new MinionverseNFT__factory(deployer).deploy(name, symbol),
-    eContractid.MinionverseNFT,
+    await new LootlotNFT__factory(deployer).deploy(name, symbol),
+    eContractid.LootlotNFT,
     [name, symbol],
     verify,
     confirms

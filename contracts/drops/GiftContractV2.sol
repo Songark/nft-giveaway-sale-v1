@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/access/AccessControl.sol";
 //import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "../tokens/MinionverseNFT.sol";
+import "../tokens/LootlotNFT.sol";
 import "../tokens/RoosterwarsNFT.sol";
 import "../interfaces/IGiftContract.sol";
 
@@ -14,8 +14,8 @@ contract GiftContractV2 is IGiftContract, AccessControl {
     uint8 private constant ID_INV = 1;
     bool private _initialized;
 
-    address public minionverseToken;
-    address public minionversePool;
+    address public lootlotToken;
+    address public lootlotPool;
     address public roosterwarsToken;
     address public roosterwarsPool;
 
@@ -87,23 +87,23 @@ contract GiftContractV2 is IGiftContract, AccessControl {
     }
 
     function initialize(
-        address _minionverseToken,
+        address _lootlotToken,
         address _roosterwarsToken,
-        address _minionversePool,
+        address _lootlotPool,
         address _roosterwarsPool
     ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         require(
-            _minionverseToken != address(0) && _roosterwarsToken != address(0),
+            _lootlotToken != address(0) && _roosterwarsToken != address(0),
             "GIFT_INIT_TOKEN_ZERO_ADDRESS"
         );
         require(
-            _minionversePool != address(0) && _roosterwarsPool != address(0),
+            _lootlotPool != address(0) && _roosterwarsPool != address(0),
             "GIFT_INIT_POOL_ZERO_ADDRESS"
         );
 
-        minionverseToken = _minionverseToken;
+        lootlotToken = _lootlotToken;
         roosterwarsToken = _roosterwarsToken;
-        minionversePool = _minionversePool;
+        lootlotPool = _lootlotPool;
         roosterwarsPool = _roosterwarsPool;
 
         setGiftLimit(ID_MOG, 3);
@@ -113,21 +113,21 @@ contract GiftContractV2 is IGiftContract, AccessControl {
         confirmsRequired = 2;
     }
 
-    function setupNFT(address _minionverse, address _roosterwars) public onlyOwner {
+    function setupNFT(address _lootlot, address _roosterwars) public onlyOwner {
         require(
-            _minionverse != address(0) && _roosterwars != address(0),
+            _lootlot != address(0) && _roosterwars != address(0),
             "GIFT_SETUP_TOKEN_ZERO_ADDRESS"
         );
-        minionverseToken = _minionverse;
+        lootlotToken = _lootlot;
         roosterwarsToken = _roosterwars;
     }
 
-    function setupTreasury(address _minionverse, address _roosterwars) public onlyOwner {
+    function setupTreasury(address _lootlot, address _roosterwars) public onlyOwner {
         require(
-            _minionverse != address(0) && _roosterwars != address(0),
+            _lootlot != address(0) && _roosterwars != address(0),
             "GIFT_SETUP_POOL_ZERO_ADDRESS"
         );        
-        minionversePool = _minionverse;
+        lootlotPool = _lootlot;
         roosterwarsPool = _roosterwars;
     }
 
@@ -228,12 +228,12 @@ contract GiftContractV2 is IGiftContract, AccessControl {
         uint256 _tokenId,
         bytes memory _data
     ) internal returns (uint256) {
-        // IERC721 nftContract = _tierIndex == 0
-        //     ? IERC721(minionverseToken)
-        //     : IERC721(roosterwarsToken);
-        // address tokenPool = _tierIndex == 0 ? minionversePool : roosterwarsPool;
+        IERC721 nftContract = _tierIndex == 0
+            ? IERC721(lootlotToken)
+            : IERC721(roosterwarsToken);
+        address tokenPool = _tierIndex == 0 ? lootlotPool : roosterwarsPool;
 
-        // require(nftContract.ownerOf(_tokenId) == tokenPool, "GIFT_NOT_EXIST");
+        require(nftContract.ownerOf(_tokenId) == tokenPool, "GIFT_NOT_EXIST");
         require(
             !_isTokenSubmitted[_tierIndex][_tokenId],
             "GIFT_SUBMITTED_ALREADY"
@@ -277,10 +277,10 @@ contract GiftContractV2 is IGiftContract, AccessControl {
 
         require(transaction.confirms >= confirmsRequired, "GIFT_NOT_CONFIRMED");
 
-        address nftContract = tierIndex == 0 ? minionverseToken : roosterwarsToken;
-        address tokenPool = tierIndex == 0 ? minionversePool : roosterwarsPool;
+        address nftContract = tierIndex == 0 ? lootlotToken : roosterwarsToken;
+        address tokenPool = tierIndex == 0 ? lootlotPool : roosterwarsPool;
         if (tierIndex == 0)
-            MinionverseNFT(nftContract).safeTransferFrom(tokenPool, transaction.to, transaction.tokenId);
+            LootlotNFT(nftContract).safeTransferFrom(tokenPool, transaction.to, transaction.tokenId);
         else
             RoosterwarsNFT(nftContract).safeTransferFrom(tokenPool, transaction.to, transaction.tokenId);
 

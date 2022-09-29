@@ -1,7 +1,7 @@
 import { hardhatArguments } from "hardhat";
 import { string } from "hardhat/internal/core/params/argumentTypes";
 import { GiftContractV2__factory, SaleContract__factory } from "../../typechain-types";
-import { MinionverseNFT__factory, RoosterwarsNFT__factory } from "../../typechain-types";
+import { LootlotNFT__factory, RoosterwarsNFT__factory } from "../../typechain-types";
 import { getEthersSigners } from "./contracts-helpers";
 import { getDb } from "./misc-utils";
 import { eContractid, tEthereumAddress } from "./types";
@@ -9,11 +9,11 @@ import hre from "hardhat";
 
 export const getFirstSigner = async () => (await getEthersSigners())[0];
 
-export const getMinionverseNFT = async (address?: tEthereumAddress) =>
-    await MinionverseNFT__factory.connect(
+export const getLootlotNFT = async (address?: tEthereumAddress) =>
+    await LootlotNFT__factory.connect(
         address ||
         (
-            await getDb().get(`${eContractid.MinionverseNFT}.${hre.network.name}`).value()
+            await getDb().get(`${eContractid.LootlotNFT}.${hre.network.name}`).value()
         ).address,
         await getFirstSigner()
     );
